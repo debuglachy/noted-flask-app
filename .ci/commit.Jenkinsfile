@@ -32,9 +32,9 @@ node {
                         ]) {
                             sh 'git config --replace-all user.email ${GIT_EMAIL}'
                             sh 'git config --replace-all user.name "${GIT_NAME}"'
-                            sh 'cat noted-flask-app.yaml'
-                            sh 'sed -i "s+${DOCKER_NAME}/noted-flask-app.*+${DOCKER_NAME}/noted-flask-app:${DOCKERTAG}+g" noted-flask-app.yaml'
-                            sh 'cat noted-flask-app.yaml'
+                            sh 'cat .ci/noted-flask-app.yaml'
+                            sh 'sed -i "s+${DOCKER_NAME}/noted-flask-app.*+${DOCKER_NAME}/noted-flask-app:${DOCKERTAG}+g" .ci/noted-flask-app.yaml'
+                            sh 'cat .ci/noted-flask-app.yaml'
                             sh 'git add .'
                             sh 'git commit -m "Done by Jenkins Job deployment: ${BUILD_NUMBER}"'
                             sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/noted-flask-app.git HEAD:main'
