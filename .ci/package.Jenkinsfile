@@ -62,12 +62,14 @@ spec:
 		          withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 		              sh '''
 		                  /kaniko/executor \
-		                  --dockerfile=Dockerfile \
+		                  --context=dir://${WORKSPACE} \
+		                  --dockerfile=${WORKSPACE}/Dockerfile \
 		                  --destination=${DOCKER_USERNAME}/noted-flask-app:${GIT_COMMIT}
 		              '''
 		              sh '''
 		                  /kaniko/executor \
-		                  --dockerfile=Dockerfile \
+		                  --context=dir://${WORKSPACE} \
+		                  --dockerfile=${WORKSPACE}/Dockerfile \
 		                  --destination=${DOCKER_USERNAME}/noted-flask-app:latest
 		              '''
 		        }
