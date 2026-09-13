@@ -56,11 +56,6 @@ spec:
 	}
  	stages {
 		stage("noted-flask-app-package") {
-		    when {
-		        allOf {
-		            changeset 'lab/scripts/prototypes/noted-flask-app/**'
-		        }
-		    }
 		    steps {
 		      echo 'Packaging flask app with docker'
 		      container('kaniko') {
