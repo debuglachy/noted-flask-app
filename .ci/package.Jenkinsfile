@@ -44,6 +44,12 @@ spec:
     - name: truststore
       mountPath: /custom-truststore
   - name: kaniko
+    env:
+      - name: APP_NAME
+        valueFrom:
+          secretKeyRef:
+            name: tools-clear-credentials
+            key: APP_NAME
     image: gcr.io/kaniko-project/executor:debug
     command: ['cat']
     tty: true
@@ -54,9 +60,6 @@ spec:
 '''
 	    }
 	}
-        environment {
-            APP_NAME = "${System.getenv('APP_NAME')}"
-        }
  	stages {
 		stage('Package') {
 		    steps {
