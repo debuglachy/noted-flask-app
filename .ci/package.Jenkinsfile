@@ -55,7 +55,7 @@ spec:
 	    }
 	}
         environment {
-            APP_NAME = "${env.APP_NAME}"
+            APP_NAME = "${System.getenv('APP_NAME')}"
         }
  	stages {
 		stage('Package') {
