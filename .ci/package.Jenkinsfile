@@ -57,20 +57,20 @@ spec:
  	stages {
 		stage('Package') {
 		    steps {
-		      echo 'Packaging ${APP_NAME} with docker'
+		      echo 'Packaging $APP_NAME with docker'
 		      container('kaniko') {
 		          withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 		              sh '''
 		                  /kaniko/executor \
 		                  --context=dir://${WORKSPACE} \
 		                  --dockerfile=${WORKSPACE}/Dockerfile \
-		                  --destination=${DOCKER_USERNAME}/${APP_NAME}:${GIT_COMMIT}
+		                  --destination=${DOCKER_USERNAME}/$APP_NAME:${GIT_COMMIT}
 		              '''
 		              sh '''
 		                  /kaniko/executor \
 		                  --context=dir://${WORKSPACE} \
 		                  --dockerfile=${WORKSPACE}/Dockerfile \
-		                  --destination=${DOCKER_USERNAME}/${APP_NAME}:latest
+		                  --destination=${DOCKER_USERNAME}/$APP_NAME:latest
 		              '''
 		        }
 		      }
