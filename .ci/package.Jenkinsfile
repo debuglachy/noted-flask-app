@@ -1,4 +1,4 @@
-def APP_NAME = env.GIT_URL.substring(env.GIT_URL.lastIndexOf('/') + 1, env.GIT_URL.length() - 4)
+def APP_NAME = env.APP_NAME
 
 pipeline {
 	agent {
