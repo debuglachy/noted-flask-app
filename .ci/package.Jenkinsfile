@@ -57,7 +57,7 @@ spec:
  	stages {
 		stage('Package') {
 		    steps {
-		      def APP_NAME = env.GIT_URL.substring(env.GIT_URL.lastIndexOf('/') + 1)
+		      def APP_NAME = env.GIT_URL.substring(env.GIT_URL.lastIndexOf('/') + 1, env.GIT_URL.length() - 4)
 		      echo 'Packaging $APP_NAME with docker'
 		      container('kaniko') {
 		          withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
@@ -81,7 +81,7 @@ spec:
 		    agent any
 		    environment{
 		      def GIT_COMMIT = "${env.GIT_COMMIT}"
-		      def APP_NAME = env.GIT_URL.substring(env.GIT_URL.lastIndexOf('/') + 1)
+		      def APP_NAME = env.GIT_URL.substring(env.GIT_URL.lastIndexOf('/') + 1, env.GIT_URL.length() - 4)
 		    }
 		    steps {
 		    	script {
