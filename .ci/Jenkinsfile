@@ -1,0 +1,131 @@
+pipeline {
+	agent {
+	    kubernetes {
+                yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: agent
+spec:
+  volumes:
+  - name: ca
+    configMap:
+      name: jenkins-ca
+  - name: truststore
+    emptyDir: {}
+  - name: kaniko
+    secret:
+      secretName: kaniko-docker
+  initContainers:
+  - name: importer
+    image: eclipse-temurin:17-alpine
+    command:
+      - sh
+      - -c
+      - |
+        cp $JAVA_HOME/lib/security/cacerts /custom-truststore/cacerts
+        keytool -importcert -noprompt -alias jenkins \
+        -file /ca-cert/root-ca.crt \
+        -keystore /custom-truststore/cacerts \
+        -storepass changeit
+    volumeMounts:
+    - name: ca
+      mountPath: /ca-cert
+    - name: truststore
+      mountPath: /custom-truststore
+  containers:
+  - name: jnlp
+    env:
+      - name: JENKINS_JAVA_OPTS
+        value: "-Djavax.net.ssl.trustStore=/custom-truststore/cacerts -Djavax.net.ssl.trustStorePassword=changeit"
+    volumeMounts:
+    - name: truststore
+      mountPath: /custom-truststore
+  - name: kaniko
+    env:
+      - name: APP_NAME
+        valueFrom:
+          secretKeyRef:
+            name: tools-clear-credentials
+            key: APP_NAME
+    image: gcr.io/kaniko-project/executor:debug
+    command: ['cat']
+    tty: true
+    volumeMounts:
+    - name: kaniko
+      mountPath: /kaniko/.docker/config.json
+      subPath: .dockerconfigjson
+'''
+	    }
+	}
+ 	stages {
+		stage('Package') {
+		    steps {
+		      container('kaniko') {
+		          withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+		              sh '''
+		                  /kaniko/executor \
+		                  --context=dir://${WORKSPACE} \
+		                  --dockerfile=${WORKSPACE}/Dockerfile \
+		                  --destination=${DOCKER_USERNAME}/$APP_NAME:${GIT_COMMIT}
+		              '''
+		              sh '''
+		                  /kaniko/executor \
+		                  --context=dir://${WORKSPACE} \
+		                  --dockerfile=${WORKSPACE}/Dockerfile \
+		                  --destination=${DOCKER_USERNAME}/$APP_NAME:latest
+		              '''
+		        }
+		      }
+		    }
+		}
+            stage('Clone repository') {
+	      
+	      
+		checkout scm
+	    }
+	    
+	    stage('Update GIT') {
+		    script {
+		        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+		            withCredentials([
+				        usernamePassword(
+				            credentialsId: 'maingithub',
+				            passwordVariable: 'GIT_PASSWORD',
+				            usernameVariable: 'GIT_USERNAME'
+				        ),
+				        string(
+				            credentialsId: 'dockerlogin-name',
+				            variable: 'DOCKER_NAME'
+				        ),
+				        string(
+				            credentialsId: 'git-email',
+				            variable: 'GIT_EMAIL'
+				        ),
+				        string(
+				            credentialsId: 'git-name',
+				            variable: 'GIT_NAME'
+				        )
+		                ]) {
+		                    sh 'git config --replace-all user.email ${GIT_EMAIL}'
+		                    sh 'git config --replace-all user.name "${GIT_NAME}"'
+		                    sh 'cat $APP_NAME.yaml'
+		                    sh 'sed -i "s+${DOCKER_NAME}/$APP_NAME.*+${DOCKER_NAME}/$APP_NAME:${DOCKERTAG}+g" $APP_NAME.yaml'
+		                    sh 'cat $APP_NAME.yaml'
+		                    sh 'git add .'
+		                    sh 'git commit -m "Done by Jenkins Job deployment: ${BUILD_NUMBER}"'
+		                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/$APP_NAME.git HEAD:main'
+		            }
+		        }
+		    }
+	    }
+
+	}
+
+        post {
+		always{
+		    echo 'pipeline completed'
+		}
+	}
+}
