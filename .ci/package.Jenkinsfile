@@ -1,7 +1,6 @@
 pipeline {
 	agent {
 	    kubernetes {
-                podRetention onFailure()
                 yaml '''
 apiVersion: v1
 kind: Pod
@@ -63,7 +62,6 @@ spec:
  	stages {
 		stage('Package') {
 		    steps {
-		      echo 'Packaging $APP_NAME with docker'
 		      container('kaniko') {
 		          withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 		              sh '''
@@ -89,8 +87,6 @@ spec:
 		    }
 		    steps {
 		    	script {
-			    	echo "${env.GIT_COMMIT}"
-				echo "triggering deployment"
 				build job: 'commit', parameters: [
 					string(name: 'DOCKERTAG', value: GIT_COMMIT),
 					string(name: 'APP_NAME', value: APP_NAME)
@@ -104,7 +100,7 @@ spec:
         }
         post {
 		always{
-		    echo 'Package pipeline completed'
+		    echo 'pipeline completed'
 		}
 	}
 }
