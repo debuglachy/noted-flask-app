@@ -2,12 +2,13 @@ import os
 
 def test_withopen_write():
 #	 Arrange
-	content = 'a'
+	file = 'a'
 
 #	Act
-	result = 	with open(content, content) as f:
-				f.write(content)
-			return
+	with open(file, 'w') as f:
+		f.write('sample')
+	with open(file, 'r') as f:
+		result = f.read()
 
 #	ASSERT
-	assert cat result == 'a'
+	assert result == 'sample'
