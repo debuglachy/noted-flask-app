@@ -22,5 +22,5 @@ def test_post(client):
 		"tags": "sample-filename",
 		"content": "sample-content",
 	})
-	assert response.request.status = 200
+	assert response.request.status == 200
 
