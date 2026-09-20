@@ -1,4 +1,6 @@
 
+# terraform
+
 .terraform/
 
 *.tfstate
@@ -6,10 +8,30 @@
 
 *.tfvars
 
+# local
+
 *.env
 *.env.local
 
 *.bak
 
+# certs
+
 *.crt
 *.p12
+
+# python and flask generated files 
+
+.venv/
+
+*.pyc
+__pycache__/
+.pytest_cache/
+*.egg-info/
+
+instance/
+dist/
+build/
+hmtlcov/
+
+.coverage
