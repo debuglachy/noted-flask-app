@@ -1,20 +1,26 @@
-import os
+from pathlib import Path
 
-from flask import request
+templates = Path("/workdir/templates")
 
-def test_data(result):
-	assert result == "general-note-tag3\nToday I learned..."
+from app import index
 
-def test_write(filename, content):
-	with open(filename, 'w') as f:
-		f.write(filename)
-		f.write(content)
-	with open(filename, 'r') as f:
-		result = f.read()
-	return test_data(result)
+@pytest.fixture()
+def appx():
+	appx = index()
+	yield appx
 
-def test_get():
-	filename = request.form.get('tags')
-	content = request.form.get('content')
-	return test_write(filename, content)
+@pytext.fixture()
+def client(appx):
+	return appx.test_client()
+
+def test_get(client):
+	response = client.get("/")
+	assert response.request.path == templates / "index"
+
+def test_post(client):
+	response = client.post("/", data={
+		"tags": "sample-filename",
+		"content": "sample-content",
+	})
+	assert response.request.status = 200
 
