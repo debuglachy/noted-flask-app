@@ -1,12 +1,12 @@
 name: Python Coverage
 
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
-    pull-requests: write
+  pull-requests: write
 
 jobs:
     python-coverage:
