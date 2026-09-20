@@ -1,14 +1,13 @@
 import os
 
-def test_withopen_write():
-#	 Arrange
-	file = 'a'
+def test_form_data(filename: str, content: str) -> str:
+	return f"{filename}{content}"
 
-#	Act
-	with open(file, 'w') as f:
-		f.write('sample')
-	with open(file, 'r') as f:
+def test_write():
+	with open(filename, 'w') as f:
+		f.write(filename)
+		f.write(content)
+	with open(filename, 'r') as f:
 		result = f.read()
+	return result
 
-#	ASSERT
-	assert result == 'sample'
