@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 templates = Path("/workdir/templates")
 
 from app import index
@@ -9,7 +11,7 @@ def appx():
 	appx = index()
 	yield appx
 
-@pytext.fixture()
+@pytest.fixture()
 def client(appx):
 	return appx.test_client()
 
