@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-DATA_FOLDER = '/app/data'
+DATA_FOLDER = Path(__file__).resolve().parent + '/data'
+
 os.makedirs(DATA_FOLDER, exist_ok=True)
 
 #defaults root path for all requests
