@@ -4,25 +4,27 @@ import pytest
 
 templates = Path("/workdir/templates")
 
-from app import index
+from app import app as flask_app
 
 @pytest.fixture()
-def appx():
-	appx = index()
-	yield appx
+def app():
+	flask_app.config.update({
+		"TESTING": True,
+	})
+	yield flask_app
 
 @pytest.fixture()
-def client(appx):
-	return appx.test_client()
+def client(app):
+	return app.test_client()
 
 def test_get(client):
 	response = client.get("/")
-	assert response.request.path == templates / "index"
+	assert response.status_code == 200
 
 def test_post(client):
 	response = client.post("/", data={
 		"tags": "sample-filename",
 		"content": "sample-content",
 	})
-	assert response.request.status == 200
+	assert response.status_code == 200
 
