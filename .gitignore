@@ -23,11 +23,14 @@
 # python and flask generated files 
 
 .venv/
+env/
+venv/
 
 *.pyc
 __pycache__/
 .pytest_cache/
 *.egg-info/
+*.py[cod]
 
 instance/
 dist/
