@@ -1,4 +1,28 @@
 
+# git
+
+.vscode/
+.idea/
+
+
+# local
+
+*.log
+*.bak
+
+
+# env
+
+*.env
+*.env.local
+
+
+# test
+
+tests/
+test/
+
+
 # terraform
 
 .terraform/
@@ -8,19 +32,14 @@
 
 *.tfvars
 
-# local
-
-*.env
-*.env.local
-
-*.bak
 
 # certs
 
 *.crt
 *.p12
 
-# python and flask generated files 
+
+# python+flask generated
 
 .venv/
 env/
