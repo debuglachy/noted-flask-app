@@ -28,5 +28,5 @@ jobs:
     - name: run pre-commit
       uses: pre-commit/action@v3.0.1
       with:
-        extra_args: --hook-stage commit-msg --commit-msg-filename <(git log -1 --pretty=%B)
+        extra_args: --hook-stage commit-msg --commit-msg-filename <(git log -1 --pretty=%B) --files .pre-commit-config.yaml
         
