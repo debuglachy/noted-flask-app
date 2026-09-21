@@ -118,7 +118,7 @@ spec:
 		                        sh 'git config --replace-all user.email ${GIT_EMAIL}'
 		                        sh 'git config --replace-all user.name "${GIT_NAME}"'
 		                        sh 'cat $APP_NAME.yaml'
-		                        sh 'sed -i "s+${DOCKER_NAME}/$APP_NAME.*+${DOCKER_NAME}/$APP_NAME:${DOCKERTAG}+g" $APP_NAME.yaml'
+		                        sh 'sed -i "s+${DOCKER_NAME}/$APP_NAME.*+${DOCKER_NAME}/$APP_NAME:${env.GIT_COMMIT}+g" $APP_NAME.yaml'
 		                        sh 'cat $APP_NAME.yaml'
 		                        sh 'git add .'
 		                        sh 'git commit -m "Done by Jenkins Job deployment: ${BUILD_NUMBER}"'
