@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -27,5 +29,5 @@ jobs:
         pytest --verbose
     - name: run pre-commit
       run: |
-        git log --pretty=%B HEAD^2 > /tmp/COMMIT_MSG
+        git log -1 --pretty=%B HEAD^2 > /tmp/COMMIT_MSG
         pre-commit run --hook-stage commit-msg --commit-msg-filename /tmp/COMMIT_MSG
