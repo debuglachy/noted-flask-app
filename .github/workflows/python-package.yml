@@ -27,5 +27,5 @@ jobs:
         pytest --verbose
     - name: run pre-commit
       run: |
-        git log -1 --pretty=%B > /tmp/COMMIT_MSG
+        git log -1 --pretty=%B HEAD^2 > /tmp/COMMIT_MSG
         pre-commit run --hook-stage commit-msg --commit-msg-filename /tmp/COMMIT_MSG
