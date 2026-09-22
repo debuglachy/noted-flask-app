@@ -11,7 +11,7 @@ jobs:
       token: ${{ steps.get-new-token.outputs.token }}
     steps:
       - id: get-new-token
-        uses: actions/create-github-app-to-token@v1
+        uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
