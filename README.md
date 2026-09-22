@@ -1,5 +1,4 @@
-[![Python Coverage](https://github.com/debuglachy/noted-flask-app/actions/workflows/python-coverage.yml/badge.svg)](https://github.com/debuglachy/noted-flask-app/actions/workflows/python-coverage.yml)
-
+[![.github/workflows/ci.yaml](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml/badge.svg)](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml)
 
 # noted-flask-app
 
