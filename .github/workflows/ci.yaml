@@ -5,8 +5,8 @@ on:
     branches: [main]
 
 jobs:
-  docker-build:
-    uses: debuglachy/ops/.github/workflows/docker-build.yaml@main
+  docker-publish:
+    uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
     with:
       image_name: 'noted-flask-app'
   python-coverage:
