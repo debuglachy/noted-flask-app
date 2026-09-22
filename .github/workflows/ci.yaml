@@ -5,19 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  generate-app-token:
-    runs-on: ubuntu-latest
-    outputs:
-      token: ${{ steps.get-new-token.outputs.token }}
-    steps:
-      - id: get-new-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
   call-docker-publish:
-    needs: generate-app-token
     permissions:
       contents: write
       packages: write
@@ -25,7 +13,8 @@ jobs:
     with:
       image_name: 'noted-flask-app'
     secrets:
-      run_token: ${{ needs.generate-app-token.outputs.token }}
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
 
 #  python-coverage:
 #    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
