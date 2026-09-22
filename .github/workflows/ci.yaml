@@ -18,6 +18,9 @@ jobs:
 
   call-docker-publish:
     needs: generate-app-token
+    permissions:
+      contents: write
+      packages: write
     uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
     with:
       image_name: 'noted-flask-app'
