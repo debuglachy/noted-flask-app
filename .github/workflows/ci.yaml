@@ -5,15 +5,28 @@ on:
     branches: [main]
 
 jobs:
-  docker-publish:
+  generate-app-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.app-token.token }}
+    steps:
+      - id: app-token
+        uses: actions/create-github-app-to-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+  call-docker-publish:
+    needs: generate-app-token
     uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
     with:
       image_name: 'noted-flask-app'
-  python-coverage:
-    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
-    with:
-      src_folder: '.'
-  python-package:
-    uses: debuglachy/ops/.github/workflows/python-package.yaml@main
-    with:
-      python_version: '3.10'
+    secrets:
+      RUN_TOKEN: ${{ needs.generate-token.outputs.token }}
+#  python-coverage:
+#    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
+#    with:
+#      src_folder: '.'
+#  python-package:
+#    uses: debuglachy/ops/.github/workflows/python-package.yaml@main
+#    with:
+#      python_version: '3.10'
