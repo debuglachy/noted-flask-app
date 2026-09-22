@@ -6,14 +6,14 @@ on:
 
 jobs:
   docker-build:
-    uses: debuglachy/ops/labs/github/workflows/docker-build.yaml@v1
+    uses: debuglachy/ops/.github/workflows/docker-build.yaml@v1
     with:
       image_name: 'noted-flask-app'
   python-coverage:
-    uses: debuglachy/ops/labs/github/workflows/python-coverage.yaml@v1
+    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@v1
     with:
       src_folder: '.'
   python-package:
-    uses: debuglachy/ops/labs/github/workflows/python-coverage.yaml@v1
+    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@v1
     with:
       python_version: '3.10'
