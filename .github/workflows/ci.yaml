@@ -9,6 +9,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      attestations: write
     uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
     with:
       image_name: 'noted-flask-app'
