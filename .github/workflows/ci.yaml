@@ -9,13 +9,10 @@ jobs:
     permissions:
       contents: write
       packages: write
-      attestations: write
     uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
     with:
       image_name: 'noted-flask-app'
-    secrets:
-      APP_ID: ${{ secrets.APP_ID }}
-      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+      image_registry: 'ghcr.io'
 
 #  python-coverage:
 #    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
