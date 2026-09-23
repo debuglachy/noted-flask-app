@@ -16,20 +16,26 @@ Simple web app for writing notes. Saves to persistent storage.
 
 ## Quick Start Guide
 
-Deploy with one command:
+Run the application:
+```bash
+docker run -p 80:8080 ghcr.io/debuglachy/noted-flask-app:main
+```
+
+Or deploy and run:
 ```bash
 docker-compose up
 ```
 
-Deploy with a custom port (defaults to 8080):
+Or use a custom port (defaults to 8080):
 ```bash
 NOTED_APP_PORT=8080 docker-compose up
 ```
 
+---
 
-# Prerequisites
+## Prerequisites
 
-Docker and docker-compose
+Docker
 
 ---
 
