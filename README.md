@@ -1,7 +1,4 @@
-[![.github/workflows/ci.yaml](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml/badge.svg)](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml)
-
-![coverage](https://raw.githubusercontent.com/debuglachy/noted-flask-app/python-coverage-comment-action-data/badge.svg)
-
+[![.github/workflows/ci.yaml](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml/badge.svg)](https://github.com/debuglachy/noted-flask-app/actions/workflows/ci.yaml) ![coverage](https://raw.githubusercontent.com/debuglachy/noted-flask-app/python-coverage-comment-action-data/badge.svg)
 ![release](https://img.shields.io/github/v/tag/debuglachy/noted-flask-app)
 
 # noted-flask-app
