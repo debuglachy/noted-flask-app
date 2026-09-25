@@ -10,14 +10,22 @@ jobs:
       contents: write
     uses: debuglachy/ops/.github/workflows/increment-semver.yaml@main
   
-  call-python-package:
+  call-commitlint-py:
     permissions:
       contents: write
       pull-requests: write
-    uses: debuglachy/ops/.github/workflows/python-package.yaml@main
+    uses: debuglachy/ops/.github/workflows/commitlint-py.yaml@main
     with:
       python_version: '3.13'
+  
+  call-python-coverage:
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
+    with:
       src_folder: '.'
+      python_version: '3.13'
   
   call-docker-publish:
     needs: call-increment-semver
@@ -29,3 +37,4 @@ jobs:
       image_name: 'noted-flask-app'
       image_registry: 'ghcr.io'
       app_version: ${{ needs.call-increment-semver.outputs.app_version }}
+  
