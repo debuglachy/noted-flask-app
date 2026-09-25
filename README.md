@@ -2,6 +2,8 @@
 
 ![coverage](https://raw.githubusercontent.com/debuglachy/noted-flask-app/python-coverage-comment-action-data/badge.svg)
 
+![release](https://img.shields.io/github/v/tag/debuglachy/noted-flask-app)
+
 # noted-flask-app
 
 Simple web app for writing notes. Saves to persistent storage.
