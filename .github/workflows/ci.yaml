@@ -28,4 +28,4 @@ jobs:
     with:
       image_name: 'noted-flask-app'
       image_registry: 'ghcr.io'
-      APP_VERSION: ${{ needs.call-increment-semver.outputs.APP_VERSION }}
+      app_version: ${{ needs.call-increment-semver.outputs.app_version }}
