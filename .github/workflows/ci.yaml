@@ -20,7 +20,7 @@ jobs:
   
   call-python-coverage:
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     uses: debuglachy/ops/.github/workflows/python-coverage.yaml@main
     with:
