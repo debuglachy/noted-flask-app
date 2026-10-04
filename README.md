@@ -14,7 +14,7 @@ Simple web app for writing notes. Saves to persistent storage.
 * Parses invalid form submissions
 
 > [!NOTE]
-> See the [design document](https://github.com/debuglachy/ops/writeups/writeup-noted-flask-app-design.md) for more information.
+> See the [design document](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.md) for more information.
 
 ---
 
@@ -47,7 +47,7 @@ Docker
 
 Developed by Lachlan Christie as a lab demo.
 
-See the [design document](https://github.com/debuglachy/ops/writeups/writeup-noted-flask-app-design.md).
+See the [design document](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.md).
 
 Refer to the [LICENSE](LICENSE).
 
