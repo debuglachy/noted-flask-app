@@ -13,6 +13,9 @@ Simple web app for writing notes. Saves to persistent storage.
 * Containerised for deployments scaling
 * Parses invalid form submissions
 
+> [!NOTE]
+> See the [design document](/debuglachy/ops/writeups/writeup-noted-flask-app-design.md) for more information.
+
 ---
 
 ## Quick Start Guide
@@ -43,6 +46,8 @@ Docker
 ## Author & License
 
 Developed by Lachlan Christie as a lab demo.
+
+See the [design document](/debuglachy/ops/writeups/writeup-noted-flask-app-design.md).
 
 Refer to the [LICENSE](LICENSE).
 
