@@ -5,6 +5,8 @@
 
 Simple web app for writing notes. Saves to persistent storage.
 
+![Animation demonstrating the noted flask app being used in Firefox.](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.gif)
+
 ---
 
 ## Description
