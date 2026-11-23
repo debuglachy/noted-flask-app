@@ -3,7 +3,7 @@
 
 # noted-flask-app
 
-Simple web app for writing notes. Saves to persistent storage.
+Simple web app for writing notes from different devices over SSL.
 
 ![Animation demonstrating the noted flask app being used in Firefox.](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.gif)
 
@@ -11,9 +11,9 @@ Simple web app for writing notes. Saves to persistent storage.
 
 ## Description
 
-* Page runs on Python with Flask imported
+* Authenticates users over encrypted connections
+* Parses and persistently stores data entries
 * Containerised for deployments scaling
-* Parses invalid form submissions
 
 > [!NOTE]
 > See the [design document](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.md) for more information.
@@ -22,20 +22,21 @@ Simple web app for writing notes. Saves to persistent storage.
 
 ## Quick Start Guide
 
-Run the application:
-```bash
-docker run -p 80:8080 ghcr.io/debuglachy/noted-flask-app:main
-```
+1. Clone repo > Open `certs` folder > Generate `server.crt` and `server.key`
 
-Or deploy and run:
-```bash
-docker-compose up
-```
+2. Open `setupfiles` folder > Remove `.example` from `bootstrap.env.example` and `plugin.env.example`
 
-Or use a custom port (defaults to 8080):
-```bash
-NOTED_APP_PORT=8080 docker-compose up
-```
+3. Change defaults (optional):
+   - Make desired password and LDAP changes to `bootstrap.env` and `plugin.env` values.
+   - When making changes to LDAP settings, also adjust the directory file in `ldif-data`.
+
+     > [!TIP]
+     > See [password help](setupfiles/passwordhelp.md) and remember to generate hash when making changes to password.
+
+4. Deploy and run:
+   ```bash
+   docker-compose up -d
+   ```
 
 ---
 
@@ -52,5 +53,4 @@ Developed by Lachlan Christie as a lab demo.
 See the [design document](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.md).
 
 Refer to the [LICENSE](LICENSE).
-
 

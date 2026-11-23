@@ -1,14 +1,41 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
-    ports:
-
-    #get default or user set port
-      - "${NOTED_APP_PORT}:${NOTED_APP_PORT}"
-    environment:
-      - NOTED_APP_PORT=${NOTED_APP_PORT}
+  ldap:
+    image: docker.io/osixia/openldap:2.6.15-rc
+    build:
+      context: ./ldap
     volumes:
-    #persist data between container restarts and crashes
-      - ./notes-data:/app/data
+      - ./ldif-data:/container/services/openldap-bootstrap/assets/ldif/data/custom
+    ports:
+      - "389:3890"
+      - "686:6860"
+    hostname: "my.example.org"
+    restart: on-failure:3
+    # import values for ldap server
+    secrets:
+      - bootstrap
+  web:
+    # import values for app and gunicorn
+    secrets:
+      - plugin
+
+    build: ./web
+
+    ports:
+      - "8080:8080"
+    #  - "${NOTED_APP_PORT}:${NOTED_APP_PORT}"
+
+    volumes:
+    #persist data between app restarts
+      - ./notes-data:/home/noted-flask/data
+
+secrets:
+  bootstrap:
+    file: ./setupfiles/bootstrap.txt
+  plugin:
+    file: ./setupfiles/plugin.txt
+deploy:
+  restart_policy:
+    condition: on-failure
+    max_attempts: 4
