@@ -27,14 +27,14 @@ jobs:
       src_folder: '.'
       python_version: '3.13'
   
-  call-docker-publish:
-    needs: call-increment-semver
-    permissions:
-      contents: write
-      packages: write
-    uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
-    with:
-      image_name: 'noted-flask-app'
-      image_registry: 'ghcr.io'
-      app_version: ${{ needs.call-increment-semver.outputs.app_version }}
+#  call-docker-publish:
+#    needs: call-increment-semver
+#    permissions:
+#      contents: write
+#      packages: write
+#    uses: debuglachy/ops/.github/workflows/docker-publish.yaml@main
+#    with:
+#      image_name: 'noted-flask-app'
+#      image_registry: 'ghcr.io'
+#      app_version: ${{ needs.call-increment-semver.outputs.app_version }}
   
