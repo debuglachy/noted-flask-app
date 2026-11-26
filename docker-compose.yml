@@ -3,15 +3,15 @@ version: '3.8'
 services:
   ldap:
     image: docker.io/osixia/openldap:2.6.15-rc
-    build:
-      context: ./ldap
     volumes:
       - ./ldif-data:/container/services/openldap-bootstrap/assets/ldif/data/custom
+    build:
+      context: ./ldap
     ports:
       - "389:3890"
       - "686:6860"
+    # when changing hostname in plugin.env, also edit the line below
     hostname: "my.example.org"
-    restart: on-failure:3
     # import values for ldap server
     secrets:
       - bootstrap
@@ -32,10 +32,7 @@ services:
 
 secrets:
   bootstrap:
-    file: ./setupfiles/bootstrap.txt
+    file: ./setupfiles/bootstrap.env
   plugin:
-    file: ./setupfiles/plugin.txt
-deploy:
-  restart_policy:
-    condition: on-failure
-    max_attempts: 4
+    file: ./setupfiles/plugin.env
+    
