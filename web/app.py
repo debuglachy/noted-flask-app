@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Noted-Flask-App is a simple web app for saving notes by LDAP-authenticated users to persistent storage.
+# Noted-Flask-App is a simple web app for writing notes from different devices into persistent storage.
 
 import os
 from pathlib import Path

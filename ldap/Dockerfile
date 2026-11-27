@@ -1,11 +1,12 @@
-FROM docker.io/osixia/openldap:2.6.15-rc
+# The official osixia image version 2.6.15-rc (pushed to Docker on Oct 26, 2026) is pulled
+FROM docker.io/osixia/openldap@sha256:caf6a875d6cab9543e415ac5623f1cefd20795b220a3aa896438be7eaaab02e0
 
-# Get root file ready to be overwritten
+# Root file is prepared for the required overwrite
 USER root
 RUN chown ldap:ldap /container/environment/.env.bootstrap
 USER ldap
 
-# Replaces lines in bootstrap file with values being passed in the secret
+# Lines in bootstrap file are replaced with values from bootstrap secret
 ENTRYPOINT ["bash", \
     "-c", \
     "for i in $(cat /run/secrets/bootstrap | awk -F= '''{print $1}'''); \

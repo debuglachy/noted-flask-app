@@ -3,7 +3,7 @@
 
 # noted-flask-app
 
-Simple web app for writing notes from different devices over SSL.
+Simple web app for writing notes from different devices into persistent storage.
 
 ![Animation demonstrating the noted flask app being used in Firefox.](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.gif)
 
@@ -11,7 +11,8 @@ Simple web app for writing notes from different devices over SSL.
 
 ## Description
 
-* Authenticates users over encrypted connections
+* Securely connects with users
+* Starts a sidecar container to validate logins
 * Parses and persistently stores data entries
 * Containerised for deployments scaling
 
@@ -35,7 +36,7 @@ Simple web app for writing notes from different devices over SSL.
 
 4. Deploy and run:
    ```bash
-   docker-compose up -d
+   docker compose up
    ```
 
 ---
@@ -53,4 +54,5 @@ Developed by Lachlan Christie as a lab demo.
 See the [design document](https://github.com/debuglachy/ops/blob/main/writeups/writeup-noted-flask-app-design.md).
 
 Refer to the [LICENSE](LICENSE).
+
 

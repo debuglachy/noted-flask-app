@@ -1,6 +1,10 @@
-## Password help
+## Change user password
 
-Changing password requires three steps.
+Open `75-custom.ldif` and set `userPassword`
+
+## Change admin password
+
+This requires three steps.
 
 1. Open `plugin.env` and set `LDAP_BIND_USER_PASSWORD`
 2. Create a hash of the password (see next section)
@@ -10,7 +14,10 @@ Changing password requires three steps.
 
 Argon2 hashing tools are widely available online and in software packages and containers.
 
-To see information on one of the tools, deploy with defaults and then run:
+To perform a partial deployment and see information on one of the tools, run:
 ```bash
-docker exec osixia/openldap:2.6.15-rc run openldap-ctl --help
+docker compose run app \
+-- /bin/sh -c \
+'apt update; apt install argon2; argon2 -h'
 ```
+

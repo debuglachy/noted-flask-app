@@ -1,38 +1,33 @@
 version: '3.8'
+name: noted-flask
 
 services:
-  ldap:
-    image: docker.io/osixia/openldap:2.6.15-rc
+  app:
+    build: ./web
+    ports:
+      - "8080:8080"
+    # mount values for app and gunicorn
+    secrets:
+      - plugin
+    volumes:
+    # persist data between app restarts
+      - ./notes-data:/home/noted-flask/data
+  sidecar:
     volumes:
       - ./ldif-data:/container/services/openldap-bootstrap/assets/ldif/data/custom
-    build:
-      context: ./ldap
+    build: ./ldap
     ports:
       - "389:3890"
       - "686:6860"
     # when changing hostname in plugin.env, also edit the line below
-    hostname: "my.example.org"
-    # import values for ldap server
+    hostname: "notes.localhost"
+    # mount values for LDAP
     secrets:
       - bootstrap
-  web:
-    # import values for app and gunicorn
-    secrets:
-      - plugin
-
-    build: ./web
-
-    ports:
-      - "8080:8080"
-    #  - "${NOTED_APP_PORT}:${NOTED_APP_PORT}"
-
-    volumes:
-    #persist data between app restarts
-      - ./notes-data:/home/noted-flask/data
 
 secrets:
   bootstrap:
     file: ./setupfiles/bootstrap.env
   plugin:
     file: ./setupfiles/plugin.env
-    
+

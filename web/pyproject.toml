@@ -1,7 +1,7 @@
 [project]
 name = "app"
 version = "1"
-description = "Noted-Flask-App is a simple web app for saving notes by LDAP-authenticated users to persistent storage."
+description = "Noted-Flask-App is a simple web app for writing notes from different devices into persistent storage."
 dependencies = [
     "flask",
     "flask_login",
