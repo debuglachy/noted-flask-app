@@ -27,17 +27,13 @@ Simple web app for writing notes from different devices into persistent storage.
 
 2. Open `setupfiles` folder > Remove `.example` from `bootstrap.env.example` and `plugin.env.example`
 
-3. Change defaults (optional):
-   - Make desired password and LDAP changes to `bootstrap.env` and `plugin.env` values.
-   - When making changes to LDAP settings, also adjust the directory file in `ldif-data`.
-
-> [!TIP]
-> See [password help](setupfiles/README.md) and remember to generate hash when making changes to password.
-
-4. Deploy and run:
+3. Deploy and run:
    ```bash
    docker compose up
    ```
+
+> [!TIP]
+> See the [guide](setupfiles/README.md) on how to run a non-default setup.
 
 ---
 

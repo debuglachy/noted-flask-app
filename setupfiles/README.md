@@ -1,14 +1,27 @@
-## Change user password
+# Custom setup (optional)
 
-Open `75-custom.ldif` and set `userPassword`
+---
 
-## Change admin password
+## Change the user login
 
-This requires three steps.
+1. Open `75-custom.ldif` and set `uid` and/or `userPassword`
+
+---
+
+## Change the admin password
 
 1. Open `plugin.env` and set `LDAP_BIND_USER_PASSWORD`
-2. Create a hash of the password (see next section)
+2. [Create a hash](#create-a-hash) of the password
 3. Open `bootstrap.env` and set `OPENLDAP_BOOTSTRAP_DATA_ROOT_PASSWORD_HASHED`
+
+---
+
+## Redefine LDAP setup
+
+1. Modify `bootstrap.env` and `plugin.env` values.
+2. Adjust the directory file in `ldif-data`.
+
+---
 
 ## Create a hash
 
