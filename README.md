@@ -31,8 +31,8 @@ Simple web app for writing notes from different devices into persistent storage.
    - Make desired password and LDAP changes to `bootstrap.env` and `plugin.env` values.
    - When making changes to LDAP settings, also adjust the directory file in `ldif-data`.
 
-   > [!TIP]
-   > See [password help](setupfiles/README.md) and remember to generate hash when making changes to password.
+> [!TIP]
+> See [password help](setupfiles/README.md) and remember to generate hash when making changes to password.
 
 4. Deploy and run:
    ```bash
