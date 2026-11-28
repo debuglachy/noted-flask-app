@@ -32,6 +32,10 @@ Simple web app for writing notes from different devices into persistent storage.
    docker compose up
    ```
 
+4. Open `https://127.0.0.1:8080` or `https://<host-ip>:8080` in the browser
+
+5. Login with username `jdoe` and password `password`
+
 > [!TIP]
 > See the [guide](setupfiles/README.md) on how to run a non-default setup.
 
