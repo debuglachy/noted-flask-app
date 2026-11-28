@@ -37,7 +37,7 @@ Simple web app for writing notes from different devices into persistent storage.
 5. Login with username `jdoe` and password `password`
 
 > [!TIP]
-> See the [guide](setupfiles/README.md) on how to run a non-default setup.
+> See the [optional guide](setupfiles/README.md) for how to run a non-default setup.
 
 ---
 
